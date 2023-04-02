@@ -1,0 +1,170 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnhds0wh7hrj1"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_5sqj2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_iug0m"]
+font_size = 50
+
+[node name="World" type="Node"]
+script = ExtResource("1_5sqj2")
+
+[node name="MainMenu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.278431, 0.278431, 0.278431, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="MainMenu/VBoxContainer"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+text = "HOST"
+
+[node name="Button2" type="Button" parent="MainMenu/VBoxContainer"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+text = "JOIN"
+
+[node name="Match" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect2" type="ColorRect" parent="Match"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.278431, 0.278431, 0.278431, 1)
+
+[node name="GridContainer" type="GridContainer" parent="Match"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 86.0
+offset_top = -152.0
+offset_right = 890.0
+offset_bottom = 152.0
+grow_vertical = 2
+columns = 2
+metadata/_edit_group_ = true
+
+[node name="Button" type="Button" parent="Match/GridContainer"]
+custom_minimum_size = Vector2(400, 150)
+layout_mode = 2
+text = "any_peer_local_reliable"
+
+[node name="Button2" type="Button" parent="Match/GridContainer"]
+custom_minimum_size = Vector2(400, 150)
+layout_mode = 2
+text = "authority_local_reliable"
+
+[node name="Button3" type="Button" parent="Match/GridContainer"]
+custom_minimum_size = Vector2(400, 150)
+layout_mode = 2
+text = "any_peer_remote_reliable"
+
+[node name="Button4" type="Button" parent="Match/GridContainer"]
+custom_minimum_size = Vector2(400, 150)
+layout_mode = 2
+text = "authority_remote_reliable"
+
+[node name="GridContainer2" type="GridContainer" parent="Match"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 1019.0
+offset_top = -152.0
+offset_right = 1823.0
+offset_bottom = 152.0
+grow_vertical = 2
+columns = 2
+metadata/_edit_group_ = true
+
+[node name="Button" type="Button" parent="Match/GridContainer2"]
+custom_minimum_size = Vector2(400, 150)
+layout_mode = 2
+text = "any_peer_local_reliable"
+
+[node name="Button2" type="Button" parent="Match/GridContainer2"]
+custom_minimum_size = Vector2(400, 150)
+layout_mode = 2
+text = "authority_local_reliable"
+
+[node name="Button3" type="Button" parent="Match/GridContainer2"]
+custom_minimum_size = Vector2(400, 150)
+layout_mode = 2
+text = "any_peer_remote_reliable"
+
+[node name="Button4" type="Button" parent="Match/GridContainer2"]
+custom_minimum_size = Vector2(400, 150)
+layout_mode = 2
+text = "authority_remote_reliable"
+
+[node name="Label" type="Label" parent="Match"]
+layout_mode = 0
+offset_left = 429.0
+offset_top = 285.0
+offset_right = 538.0
+offset_bottom = 357.0
+text = "SELF"
+label_settings = SubResource("LabelSettings_iug0m")
+
+[node name="Label2" type="Label" parent="Match"]
+layout_mode = 0
+offset_left = 1336.0
+offset_top = 285.0
+offset_right = 1501.0
+offset_bottom = 357.0
+text = "OTHER"
+label_settings = SubResource("LabelSettings_iug0m")
+
+[node name="Players" type="Node" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Players"]
+_spawnable_scenes = PackedStringArray("res://player_entity.tscn")
+spawn_path = NodePath("..")
+
+[connection signal="pressed" from="MainMenu/VBoxContainer/Button" to="." method="host_game"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/Button2" to="." method="join_game"]
+[connection signal="pressed" from="Match/GridContainer/Button" to="." method="_on_any_peer_local_reliable_pressed"]
+[connection signal="pressed" from="Match/GridContainer/Button2" to="." method="_on_authority_local_reliable_pressed"]
+[connection signal="pressed" from="Match/GridContainer/Button3" to="." method="_on_any_peer_remote_reliable_pressed"]
+[connection signal="pressed" from="Match/GridContainer/Button4" to="." method="_on_authority_remote_reliable_pressed"]
+[connection signal="pressed" from="Match/GridContainer2/Button" to="." method="_on_other_any_peer_local_reliable_pressed"]
+[connection signal="pressed" from="Match/GridContainer2/Button2" to="." method="_on_other_authority_local_reliable_pressed"]
+[connection signal="pressed" from="Match/GridContainer2/Button3" to="." method="_on_other_any_peer_remote_reliable_pressed"]
+[connection signal="pressed" from="Match/GridContainer2/Button4" to="." method="_on_other_authority_remote_reliable_pressed"]
+[connection signal="spawned" from="Players/MultiplayerSpawner" to="." method="_on_player_entity_spawned"]
